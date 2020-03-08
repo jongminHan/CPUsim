@@ -2,30 +2,12 @@ public class Main
 {
     public static void main(String[] args)
     {
-        RSlatch rslatch = new RSlatch();
+        RAM ram = new RAM();
 
-        try
-        {
-            rslatch.input(false, false);
-        }
-        catch (InvalidIntputException ex)
-        {
-            ex.printStackTrace();
-        }
+        ram.AddressDecoder(3);
+        ram.SetReadWrite(eRWmode.WRITE);
+        ram.WriteSwitch(54);
 
-        System.out.println("Q: " + rslatch.Q());
-        System.out.println("~Q: " + rslatch.NotQ());
 
-        try
-        {
-            rslatch.input(true, false);
-        }
-        catch (InvalidIntputException ex)
-        {
-            ex.printStackTrace();
-        }
-
-        System.out.println("Q: " + rslatch.Q());
-        System.out.println("~Q: " + rslatch.NotQ());
     }
 }
