@@ -2,8 +2,6 @@ import java.util.ArrayList;
 
 public class RAM
 {
-    private eRWmode mMode = eRWmode.READ;
-    private int mAddress = 0;
     private ArrayList<ArrayList<Boolean>> mMemory;
 
     /*
@@ -29,58 +27,39 @@ public class RAM
         }
     }
 
-    public void AddressDecoder(int address)
+    public void WriteMode(int address, int input)
     {
         assert address >= 0 && address < mMemory.size() : "Address out of index";
-        mAddress = address;
-    }
 
-    public void SetReadWrite(eRWmode mode)
-    {
-        mMode = mode;
-    }
-
-    public void WriteSwitch(int decimal)
-    {
-        // Only works in WRITE mode
-        if (mMode == eRWmode.WRITE)
+        // Convert decimal to binary and write.
+        for (int i = 0; i < 8; i++)
         {
-            // Convert decimal to binary and write.
-            for (int i = 0; i < 8; i++)
-            {
-                int remnant = decimal % 2;
-                decimal = decimal / 2;
+            int remnant = input % 2;
+            input = input / 2;
 
-                if (remnant == 0)
-                {
-                    mMemory.get(mAddress).set(i, false);
-                }
-                else
-                {
-                    mMemory.get(mAddress).set(i, true);
-                }
+            if (remnant == 0)
+            {
+                mMemory.get(address).set(i, false);
+            }
+            else
+            {
+                mMemory.get(address).set(i, true);
             }
         }
     }
 
-    public int ReadBuffer()
+    public int ReadMode(int address)
     {
-        // Only works in READ mode
-        if (mMode == eRWmode.READ)
+        int read = 0;
+
+        for (int i = 0; i < 8; i++)
         {
-            int read = 0;
-
-            for (int i = 0; i < 8; i++)
+            if (mMemory.get(address).get(i)) // In case of true...
             {
-                if (mMemory.get(mAddress).get(i)) // In case of true...
-                {
-                    read += (int)Math.pow(2, i);
-                }
+                read += (int)Math.pow(2, i);
             }
-
-            return read;
         }
 
-        return -1;
+        return read;
     }
 }
