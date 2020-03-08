@@ -13,5 +13,8 @@ public class Main
         {
             System.out.println(ram.ReadMode(i));
         }
+
+        FullAdder a = new FullAdder();
+        a.Add(255, 255);
     }
 }
