@@ -1,3 +1,6 @@
+// Copyright © 2020 Jongmin Han. All rights reserved.
+// No part of this code may be reproduced or used in any manner
+// without written permission of the copyright owner.
 public class RAM
 {
     private Boolean[][] mMemory;
