@@ -1,55 +1,24 @@
 // Copyright © 2020 Jongmin Han. All rights reserved.
 // No part of this code may be reproduced or used in any manner
 // without written permission of the copyright owner.
+
+// 64KB RAM
 public class RAM
 {
-    private Boolean[][] mMemory;
+    private byte[] mMemory;
+
     public RAM()
     {
-        mMemory = new Boolean[8][8];
-
-        for (int i = 0; i < 8; i++)
-        {
-            for (int j = 0; j < 8; j++)
-            {
-                mMemory[i][j] = false;
-            }
-        }
+        mMemory = new byte[65_536];
     }
 
-    public void WriteMode(int address, int input)
+    public void WriteMode(int address, byte input)
     {
-        assert address >= 0 && address < 8 : "Address out of index";
-
-        // Convert decimal to binary and write.
-        for (int i = 0; i < 8; i++)
-        {
-            int remnant = input % 2;
-            input = input / 2;
-
-            if (remnant == 0)
-            {
-                mMemory[address][i] = false;
-            }
-            else
-            {
-                mMemory[address][i] = true;
-            }
-        }
+        mMemory[address] = input;
     }
 
     public int ReadMode(int address)
     {
-        int read = 0;
-
-        for (int i = 0; i < 8; i++)
-        {
-            if (mMemory[address][i]) // In case of true...
-            {
-                read += (int)Math.pow(2, i);
-            }
-        }
-
-        return read;
+        return mMemory[address] & 0xFF;
     }
 }

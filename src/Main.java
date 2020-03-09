@@ -2,15 +2,16 @@ public class Main
 {
     public static void main(String[] args)
     {
-        // 10 + 4 + 18 + 21 + 36 + 37 + 5
-        FullAdder a = new FullAdder();
-        a.Add(10, 4);
-        a.MuxOff(18);
-        a.MuxOff(21);
-        a.MuxOff(36);
-        a.MuxOff(37);
-        a.MuxOff(5);
+        RAM ram = new RAM();
 
-        System.out.println(a.GetOutput());
+        ram.WriteMode(34, (byte)2);
+        ram.WriteMode(35, (byte)-53);
+        ram.WriteMode(36, (byte)255);
+
+
+        System.out.println(ram.ReadMode(34));
+        System.out.println(ram.ReadMode(35));
+        System.out.println(ram.ReadMode(36));
+
     }
 }
