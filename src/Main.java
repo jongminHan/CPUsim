@@ -1,17 +1,32 @@
 public class Main
 {
+
     public static void main(String[] args)
     {
         RAM ram = new RAM();
+        ProgramCounter pc = new ProgramCounter();
+        FullAdder fa = new FullAdder();
+        Register registerA = new Register();
+        Register registerB = new Register();
 
-        ram.WriteMode(34, (byte)2);
-        ram.WriteMode(35, (byte)-53);
-        ram.WriteMode(36, (byte)255);
+        eCommand command = eCommand.LDA;
 
+        switch (command)
+        {
+            case LDA:
+                registerA.Load();
+                break;
+            case LDB:
+                registerB.Load();
+                break;
+            case STA:
+                break;
+            case STB:
+                break;
+            default:
 
-        System.out.println(ram.ReadMode(34));
-        System.out.println(ram.ReadMode(35));
-        System.out.println(ram.ReadMode(36));
+        }
+
 
     }
 }

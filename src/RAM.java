@@ -17,8 +17,8 @@ public class RAM
         mMemory[address] = input;
     }
 
-    public int ReadMode(int address)
+    public byte ReadMode(int address)
     {
-        return mMemory[address] & 0xFF;
+        return mMemory[address];
     }
 }
