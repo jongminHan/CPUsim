@@ -5,19 +5,24 @@
 // 64KB RAM
 public class RAM
 {
-    private byte[] mMemory;
+    private Line[] mMemory;
 
     public RAM()
     {
-        mMemory = new byte[65_536];
+        mMemory = new Line[65_536];
     }
 
-    public void WriteMode(int address, byte input)
+    public void WriteMode(int address, eCommand command, byte data)
     {
-        mMemory[address] = input;
+        mMemory[address] = new Line(command, data);
     }
 
-    public byte ReadMode(int address)
+    public void WriteMode(int address, eCommand command)
+    {
+        mMemory[address] = new Line(command);
+    }
+
+    public Line ReadMode(int address)
     {
         return mMemory[address];
     }
